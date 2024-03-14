@@ -15,7 +15,7 @@ tools = [
     Tool.from_function(
         name="Vector Search Index",  # (1)
         description="Provides information about movie plots using Vector Search", # (2)
-        func = kg_qa, # (3)
+        func = kg_qa.invoke, # (3)
         return_direct=True
     )
 ]
@@ -32,7 +32,7 @@ agent_executor = AgentExecutor(
     agent=agent,
     tools=tools,
     memory=memory,
-    verbose=False
+    verbose=True
     )
 
 def generate_response(prompt):
