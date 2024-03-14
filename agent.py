@@ -1,11 +1,8 @@
 from langchain.agents import AgentExecutor, create_react_agent
 from langchain import hub
-
 from tools.vector import kg_qa
-
-# Include the LLM from a previous lesson
+from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from llm import llm
-
 from langchain.tools import Tool
 
 tools = [
@@ -23,7 +20,6 @@ tools = [
     )
 ]
 
-from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 memory = ConversationBufferWindowMemory(
     memory_key='chat_history',
     k=5,

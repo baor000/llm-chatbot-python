@@ -1,6 +1,7 @@
 import streamlit as st
 from langchain_community.vectorstores.neo4j_vector import Neo4jVector
 from llm import llm, embeddings
+from langchain.chains import RetrievalQA
 
 neo4jvector = Neo4jVector.from_existing_index(
     embeddings,                              # (1)
@@ -26,8 +27,6 @@ RETURN
 )
 
 retriever = neo4jvector.as_retriever()
-
-from langchain.chains import RetrievalQA
 
 kg_qa = RetrievalQA.from_chain_type(
     llm,                  # (1)
