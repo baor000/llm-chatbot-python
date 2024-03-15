@@ -2,6 +2,8 @@ import streamlit as st
 from langchain_community.vectorstores.neo4j_vector import Neo4jVector
 from llm import llm, embeddings
 from langchain.chains import RetrievalQA
+from langchain.chains.conversation.memory import ConversationBufferWindowMemory
+
 
 neo4jvector = Neo4jVector.from_existing_index(
     embeddings,                              # (1)
@@ -13,7 +15,7 @@ neo4jvector = Neo4jVector.from_existing_index(
     text_node_property="plot",               # (7)
     embedding_node_property="plotEmbedding", # (8)
     retrieval_query="""
-RETURN
+    RETURN
     node.plot AS text,
     score,
     {
@@ -33,4 +35,3 @@ kg_qa = RetrievalQA.from_chain_type(
     chain_type="stuff",   # (2)
     retriever=retriever,  # (3)
 )
-
